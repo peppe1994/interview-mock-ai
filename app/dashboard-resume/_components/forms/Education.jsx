@@ -56,10 +56,9 @@ function Education() {
 
   }
   const RemoveEducation=()=>{
-    setEducationalList(educationalList=>educationalList.slice(0,-1))
+    setEducationalList(educationalList=> educationalList?.length > 0 && educationalList.slice(0,-1))
 
   }
-
 
   useEffect(()=>{
     setResumeInfo({
@@ -67,6 +66,7 @@ function Education() {
       education:educationalList
     })
   },[educationalList])
+  
   return (
     <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
     <h2 className='font-bold text-lg'>Education</h2>
@@ -76,32 +76,32 @@ function Education() {
       {educationalList && educationalList.map((item,index)=>(
         <div>
           <div className='gap-3 border p-3 my-5 rounded-lg'>
-            <div className='col-span-2'>
+            <div className='col-span-2 mb-3'>
               <label>University Name</label>
               <Input name="universityName" 
               onChange={(e)=>handleChange(e,index)}
               defaultValue={item?.universityName}
               />
             </div>
-            <div>
+            <div className="mb-3">
               <label>Degree</label>
               <Input name="degree" 
               onChange={(e)=>handleChange(e,index)}
               defaultValue={item?.degree} />
             </div>
-            <div>
+            <div className="mb-3">
               <label>Major</label>
               <Input name="major" 
               onChange={(e)=>handleChange(e,index)}
               defaultValue={item?.major} />
             </div>
-            <div>
+            <div className="mb-3">
               <label>Start Date</label>
               <Input type="date" name="startDate" 
               onChange={(e)=>handleChange(e,index)}
               defaultValue={item?.startDate} />
             </div>
-            <div>
+            <div className="mb-3">
               <label>End Date</label>
               <Input type="date" name="endDate" 
               onChange={(e)=>handleChange(e,index)}

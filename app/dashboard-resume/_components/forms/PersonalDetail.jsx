@@ -2,7 +2,7 @@ import { Input } from '@/components/ui/input';
 import { useContext, useEffect, useState } from 'react';
 import { ResumeInfoContext } from '../../context/ResumeInfoContext';
 
-function PersonalDetail({enabledNext}) {
+function PersonalDetail() {
 
     const {resumeInfo,setResumeInfo}=useContext(ResumeInfoContext)
 
@@ -12,7 +12,6 @@ function PersonalDetail({enabledNext}) {
     },[])
 
     const handleInputChange=(e)=>{
-        enabledNext(true)
         const {name,value}=e.target;
 
         setFormData({

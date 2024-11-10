@@ -1,20 +1,19 @@
 "use client";
 import { UserButton } from "@clerk/nextjs";
-import Image from "next/image";
+import { Brain } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
 
 function Header() {
   const path = usePathname();
-  useEffect(() => {
-    console.log(path);
-  }, []);
 
   return (
     <div className="flex p-4 items-center justify-between bg-secondary shadow-sm">
-      <Image src={"/logo.svg"} width={160} height={100} alt="logo" />
-      <ul className="hidden md:flex gap-6">
+      <div className="flex flex-row gap-3 items-center">
+        <Brain className="text-primary" />
+        <p className="hidden md:flex text-primary font-bold text-2xl font-mono">AI Title App</p>
+      </div>
+      <ul className="flex gap-6">
         <Link href={"/dashboard"}>
           <li
             className={`hover:text-primary hover:font-bold transition-all

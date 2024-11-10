@@ -4,15 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { ResumeInfoContext } from "../../context/ResumeInfoContext";
 import RichTextEditor from "../RichTextEditor";
 
-const formField = {
-  title: "",
-  companyName: "",
-  city: "",
-  state: "",
-  startDate: "",
-  endDate: "",
-  workSummery: "",
-};
+
 function Experience() {
   const [experinceList, setExperinceList] = useState([]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -72,40 +64,40 @@ function Experience() {
           {experinceList.map((item, index) => (
             <div key={index}>
               <div className="border p-3 my-5 rounded-lg">
-                <div>
-                  <label className="text-xs">Position Title</label>
+                <div className="mb-3">
+                  <label>Position Title</label>
                   <Input
                     name="title"
                     onChange={(event) => handleChange(index, event)}
                     defaultValue={item?.title}
                   />
                 </div>
-                <div>
-                  <label className="text-xs">Company Name</label>
+                <div className="mb-3">
+                  <label>Company Name</label>
                   <Input
                     name="companyName"
                     onChange={(event) => handleChange(index, event)}
                     defaultValue={item?.companyName}
                   />
                 </div>
-                <div>
-                  <label className="text-xs">City</label>
+                <div className="mb-3">
+                  <label>City</label>
                   <Input
                     name="city"
                     onChange={(event) => handleChange(index, event)}
                     defaultValue={item?.city}
                   />
                 </div>
-                <div>
-                  <label className="text-xs">State</label>
+                <div className="mb-3">
+                  <label>State</label>
                   <Input
                     name="state"
                     onChange={(event) => handleChange(index, event)}
                     defaultValue={item?.state}
                   />
                 </div>
-                <div>
-                  <label className="text-xs">Start Date</label>
+                <div className="mb-3">
+                  <label>Start Date</label>
                   <Input
                     type="date"
                     name="startDate"
@@ -113,8 +105,8 @@ function Experience() {
                     defaultValue={item?.startDate}
                   />
                 </div>
-                <div>
-                  <label className="text-xs">End Date</label>
+                <div className="mb-3">
+                  <label>End Date</label>
                   <Input
                     type="date"
                     name="endDate"

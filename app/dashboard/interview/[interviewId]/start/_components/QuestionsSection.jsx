@@ -17,7 +17,7 @@ function QuestionsSection({mockInterviewQuestion,activeQuestionIndex}) {
     }
     return mockInterviewQuestion&&(
     <div className='p-5 border rounded-lg my-10'>
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
+        <div>
             {mockInterviewQuestion&&mockInterviewQuestion.map((question,index)=>(
                 <h2 className={`p-2 border rounded-full
                 text-xs md:text-sm text-center cursor-pointer

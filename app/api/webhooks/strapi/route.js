@@ -1,3 +1,4 @@
+import { createOrUpdateSubscription } from "@/utils/db/action";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -78,6 +79,14 @@ export async function POST(req) {
       }
 
       console.log(`Creating/updating subscription for user ${userId}`);  
+      const updatedSubscription = await createOrUpdateSubscription(
+        userId,
+        subscriptionId,
+        plan,
+        "active",
+        new Date(subscription.current_period_start * 1000),
+        new Date(subscription.current_period_end * 1000)
+      );
 
       if (!updatedSubscription) {
         console.error("Failed to create or update subscription");

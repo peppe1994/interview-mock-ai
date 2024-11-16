@@ -41,7 +41,6 @@ function AddNewInterview() {
         // Step 1: Trim leading/trailing whitespace
         // Step 2: Remove unexpected characters or extra whitespace
         // This example removes any non-printable characters like BOM or zero-width spaces
-        console.log("@@MockJsonResp parsed: ", JSON.parse(MockJsonResp));
         setJsonResponse(MockJsonResp);
 
         if(MockJsonResp)

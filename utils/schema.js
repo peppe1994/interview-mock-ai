@@ -1,4 +1,4 @@
-import { pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+import {varchar, pgTable, serial, text, timestamp, boolean} from 'drizzle-orm/pg-core';
 
 export const MockInterview=pgTable('mockInterview',{
     id:serial('id').primaryKey(),
@@ -22,4 +22,22 @@ export const UserAnswer=pgTable('userAnswer',{
     userEmail:varchar('userEmail'),
     createdAt:varchar('createdAt'),
 
+})
+
+
+export const Subscriptions = pgTable('subscriptions', {
+    id: serial('id').primaryKey(),
+    userId: varchar('user_id').notNull(),
+    stripeSubscriptionId: varchar('stripe_subscription_id', {
+        length: 255
+    }).notNull(),
+    plan: varchar('plan', {
+        length: 50
+    }).notNull(),
+    status: varchar('status', {
+        length: 50
+    }).notNull(),
+    currentPeriodStart: timestamp('current_period_start').notNull(),
+    currentPeriodEnd: timestamp('current_period_end').notNull(),
+    cancelAtPeriodEnd: boolean('cancel_at_period_end').notNull().default(false),
 })

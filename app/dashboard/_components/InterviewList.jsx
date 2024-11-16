@@ -37,7 +37,7 @@ function InterviewList() {
             ))
             :
             [1,2,3,4].map((item,index)=>(
-                <div className='h-[100px] w-full bg-gray-200 animate-pulse rounded-lg '>
+                <div key={index} className='h-[100px] w-full bg-gray-200 animate-pulse rounded-lg '>
                 </div>
             ))
         }

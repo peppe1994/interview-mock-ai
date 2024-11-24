@@ -11,6 +11,7 @@ import Link from "next/link";
 function Dashboard() {
   const { user } = useUser();
   const [freeTrialExpired, setFreeTrialExpired] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     //Adding payment check
@@ -30,20 +31,30 @@ function Dashboard() {
 
   return (
     <>
-      {freeTrialExpired && (
+      {loading && (
+        <div className="my-5 flex flex-col gap-6">
+          <div className="flex flex-col gap-3">
+            <Skeleton className="h-[20px] w-[200px]" />
+            <Skeleton className="h-[110px]" />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Skeleton className="h-[20px] w-[200px]" />
+            <Skeleton className="h-[110px]" />
+          </div>
+        </div>
+      )}
+      {freeTrialExpired && !loading && (
         <div className="p-10 flex flex-col gap-4 items-center justify-center">
           <h2 className="font-bold text-3xl text-primary">Warning</h2>
           <h2 className="text-gray-500 text-xl">
             Your plan period has expired. Upgrade your plan to continue.
           </h2>
-          <Link className="mt-6"  href="dashboard/upgrade">
-            <Button type="button">
-              Upgrade your plan
-            </Button>
+          <Link className="mt-6" href="dashboard/upgrade">
+            <Button type="button">Upgrade your plan</Button>
           </Link>
         </div>
       )}
-      {!freeTrialExpired && (
+      {!freeTrialExpired && !loading && (
         <div className="p-10">
           <h2 className="font-bold text-3xl text-primary">Dashboard</h2>
           <h2 className="text-gray-500">

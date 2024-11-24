@@ -8,6 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { isFreeTrialExpired } from "@/utils/dateUtil";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getSubscriptionByUserId } from "@/utils/db/action";
 
 function Dashboard() {
   const [resumeInfo, setResumeInfo] = useState();
@@ -20,6 +21,7 @@ function Dashboard() {
     if (user?.createdAt && user.id) {
       getSubscriptionByUserId(user.id).then((res) => {
         console.log("@@@SUBSCRIPTION: ", res);
+        setLoading(false);
         const userRegistrationDate = new Date(user.createdAt);
         if (
           (!res || res.length === 0) &&
@@ -27,7 +29,6 @@ function Dashboard() {
         )
           setFreeTrialExpired(true);
         else setFreeTrialExpired(false);
-        setLoading(false);
       });
     }
   }, [user]);

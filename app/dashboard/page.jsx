@@ -7,6 +7,7 @@ import AddNewInterview from "./_components/AddNewInterview";
 import InterviewList from "./_components/InterviewList";
 import { getSubscriptionByUserId } from "@/utils/db/action";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function Dashboard() {
   const { user } = useUser();

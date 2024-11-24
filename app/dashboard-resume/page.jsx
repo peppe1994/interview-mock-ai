@@ -7,6 +7,7 @@ import { ResumeInfoContext } from "./context/ResumeInfoContext";
 import { useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { isFreeTrialExpired } from "@/utils/dateUtil";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function Dashboard() {
   const [resumeInfo, setResumeInfo] = useState();

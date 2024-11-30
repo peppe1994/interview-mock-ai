@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { isFreeTrialExpired } from "@/utils/dateUtil";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSubscriptionByUserId } from "@/utils/db/action";
+import Link from "next/link";
 
 function Dashboard() {
   const [resumeInfo, setResumeInfo] = useState();
@@ -20,7 +21,6 @@ function Dashboard() {
     //Adding payment check
     if (user?.createdAt && user.id) {
       getSubscriptionByUserId(user.id).then((res) => {
-        console.log("@@@SUBSCRIPTION: ", res);
         setLoading(false);
         const userRegistrationDate = new Date(user.createdAt);
         if (
@@ -54,11 +54,11 @@ function Dashboard() {
             <div className="p-10 flex flex-col gap-4 items-center justify-center">
               <h2 className="font-bold text-3xl text-primary">Warning</h2>
               <h2 className="text-gray-500 text-xl">
-                Your trial period has expired. Upgrade your plan to continue.
+                Your subscription has expired. Upgrade your plan to continue.
               </h2>
-              <Button className="mt-6" type="button">
-                Upgrade your plan
-              </Button>
+              <Link className="mt-6" href="dashboard/upgrade">
+                <Button type="button">Upgrade your plan</Button>
+              </Link>
             </div>
           )}
         {!freeTrialExpired &&

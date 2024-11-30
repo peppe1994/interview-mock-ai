@@ -48,7 +48,7 @@ function Dashboard() {
         <div className="p-10 flex flex-col gap-4 items-center justify-center">
           <h2 className="font-bold text-3xl text-primary">Warning</h2>
           <h2 className="text-gray-500 text-xl">
-            Your plan period has expired. Upgrade your plan to continue.
+            Your subscription period has expired. Upgrade your plan to continue.
           </h2>
           <Link className="mt-6" href="dashboard/upgrade">
             <Button type="button">Upgrade your plan</Button>

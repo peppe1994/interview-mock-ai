@@ -1,10 +1,12 @@
 "use client";
 import { CheckIcon } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { getSubscriptionByUserId } from "@/utils/db/action";
+import { isFreeTrialExpired } from "@/utils/dateUtil";
 //import { getSubscriptionByUserId } from "@/utils/db/action";
 
 const pricingPlans = [
@@ -32,6 +34,20 @@ const pricingPlans = [
 export default function PricingPage() {
   const { isSignedIn, user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
+  const [isFreeTrial, setIsFreeTrial] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  useEffect(() => {
+    if (user?.createdAt && user.id) {
+      getSubscriptionByUserId(user.id).then((res) => {
+        const userRegistrationDate = new Date(user.createdAt);
+        if(res && res.length > 0)
+          setIsSubscribed(true);
+        else if(!isFreeTrialExpired(userRegistrationDate))
+          setIsFreeTrial(true);
+      });
+    }
+  },[user])
 
   const handleSubscribe = async (priceId) => {
     if (!isSignedIn) {
@@ -99,17 +115,19 @@ export default function PricingPage() {
               {plan.priceId && (
                 <Button
                   onClick={() => handleSubscribe(plan.priceId)}
-                  disabled={isLoading}
+                  disabled={isLoading || (isSubscribed)}
                   className="w-full hover:bg-gray-800"
                 >
-                  {isLoading ? "Processing..." : "Choose Plan"}
+                  {isSubscribed ? "Current": (isLoading ? "Processing..." : "Choose Plan")}
                 </Button>
               )}
               {!plan.priceId && (
               <Link href={'/dashboard'}>
-                <Button className="w-full hover:bg-gray-800">Start 2 days free trial</Button>
+                <Button className="w-full hover:bg-gray-800" disabled={isFreeTrial}>
+                  {isFreeTrial ? "Current": "Start 2 days free trial"}
+                </Button>
               </Link>
-              )}
+              )} 
             </div>
           ))}
         </div>

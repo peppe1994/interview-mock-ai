@@ -18,7 +18,6 @@ function Dashboard() {
     //Adding payment check
     if (user?.createdAt && user.id) {
       getSubscriptionByUserId(user.id).then((res) => {
-        console.log("@@@SUBSCRIPTION: ", res);
         setLoading(false);
         const userRegistrationDate = new Date(user.createdAt);
         if (
